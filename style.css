@@ -1,0 +1,94 @@
+:root {
+    --body-bg: #123;
+    --nav-bg: rgb(69, 92, 115);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: system-ui;
+}
+
+body {
+    min-height: 200vh;
+    margin: 0;
+    font-size: 1.25rem;
+    background: var(--body-bg);
+    color: white;
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 2rem; /*gap = ช่องว่าง 2rem = 2 ตัวอักษร */
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    max-height: 100svh;
+    background-color: var(--nav-bg);
+}
+
+.nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    display: grid;
+    gap: 2rem;  /*ความห่างระหว่างบรรทัด txt ด้านข้าง*/
+    padding-block: 2rem;
+    font-size: 1rem;
+}
+
+.nav-list li {
+    padding: 1rem 2rem; /*ช่องว่างของกรอบ*/
+    margin-left: 2rem; /*เพิ่มพท ขอบด้านนอก --nav-bg: rgb(255, 0, 208);*/
+    border-radius: 100vw 0 0 100vw; /*ทำกรอบให้โค้งมน vw = มุมมน | 100% = วงรี*/
+    transition: background 1.5s, box-shadow 1.5s;
+}
+
+.nav-list li.active {
+    /* view-transition-name: activeNavTab; */
+    background: var(--body-bg); 
+    position: relative; /*ให้จุดอยู่ในกรอบ*/
+}
+
+/* .nav-list a {
+    view-timeline-name: navLink;
+} */
+
+/* ::view-transition-group(activeNavTab) {
+    animation-duration: 1.5s;
+} */
+
+.nav-list li.active::before,
+.nav-list li.active::after{
+    --border-radins: 2rem;
+
+    content: '';
+    position: absolute;
+    width: var(--border-radins);
+    height: var(--border-radins);
+    right: 0;
+    background: var(--nav-bg);
+    border-radius: 100vw;
+}
+
+.nav-list li.active::before{
+    top: calc(var(--border-radins) * -1);
+    border-radius: 0 0 100vw 0;
+    box-shadow: 5px 5px 0 5px var(--body-bg);
+    transition: box-shadow 1.5s;
+}
+
+.nav-list li.active::after{
+    bottom: calc(var(--border-radins) * -1);
+    border-radius: 0 100vw 0 0;
+    box-shadow: 5px -5px 0 5px var(--body-bg);
+    transition: box-shadow 1.5s;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+}
